@@ -1,5 +1,7 @@
 package algorithm.sort;
 
+import java.util.Arrays;
+
 public class mergeSort {
 
     private int[] sorted; // merge 과정에서 사용하는 임시 배열
@@ -35,8 +37,25 @@ public class mergeSort {
         }
     }
 
+    // Top-Down 방식으로 구현한 merge Sort
+    public void topDownMergeSort(int[] arr, int left, int right) {
+        if(left < right) {
+            int mid = (left + right) / 2;
+            topDownMergeSort(arr, left, mid); // 왼쪽 부분 배열
+            topDownMergeSort(arr, mid + 1, right); // 오른쪽 부분 배열
+            merge(arr, left, mid, right); // 병합
+        }
+    }
+
     public void mergeSort(int[] arr) {
+        // Bottom-Up 방식
+        int[] buarr = Arrays.copyOf(arr, arr.length);
         sorted = new int[arr.length];
-        bottomUpMergeSort(arr, 0, arr.length - 1);
+        bottomUpMergeSort(buarr, 0, buarr.length - 1);
+
+        // Top-Down 방식
+        int[] tdarr = Arrays.copyOf(arr, arr.length);
+        sorted = new int[arr.length];
+        topDownMergeSort(tdarr, 0, tdarr.length - 1);
     }
 }
