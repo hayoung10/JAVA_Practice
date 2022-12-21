@@ -1,5 +1,7 @@
 package Level3;
 
+// DP 동적계획법
+
 public class Way_to_School {
     public int solution(int m, int n, int[][] puddles) {
         int[][] road = new int[n][m];
