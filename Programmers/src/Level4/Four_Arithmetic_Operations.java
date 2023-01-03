@@ -3,49 +3,42 @@ package Level4;
 // DP 동적계획법
 
 public class Four_Arithmetic_Operations {
-    private int[] numbers;
-    private String[] operations;
     private int[][][] dp = new int[201][201][2];
 
     public int solution(String arr[]) {
-        int n = arr.length / 2;
+        int n = arr.length / 2 + 1; // 숫자의 개수
 
-        numbers = new int[n + 1];
-        operations = new String[n];
+        // 초기화
         for(int i = 0; i < n + 1; i++) {
             for(int j = 0; j < n + 1; j++) {
-                dp[i][j][0] = Integer.MIN_VALUE;
-                dp[i][j][1] = Integer.MAX_VALUE;
+                dp[i][j][0] = Integer.MIN_VALUE; // [i, j] 구간의 연산의 최댓값
+                dp[i][j][1] = Integer.MAX_VALUE; // [i, j] 구간의 연산의 최솟값
             }
         }
 
-        for(int i = 0; i < arr.length; i++) {
-            if(i % 2 == 0) numbers[i / 2] = Integer.parseInt(arr[i]);
-            else operations[i / 2] = arr[i];
-        }
+        for(int step = 0; step < n; step++) { // step : i와 j의 간격
+            for(int i = 0; i < n - step; i++) {
+                int j = step + i;
 
-        return func(0, n, 0);
-    }
+                if(step == 0) {
+                    dp[i][j][0] = Integer.parseInt(arr[i * 2]);
+                    dp[i][j][1] = Integer.parseInt(arr[i * 2]);
+                    continue;
+                }
 
-    private int func(int start, int end, int flag) { // flag == 0 : 최대, 1 : 최소
-        if(start == end)
-            return dp[start][end][flag] = numbers[start];
+                for(int k = i; k < j; k++) {
+                    if(arr[k * 2 + 1].equals("-")) {
+                        dp[i][j][0] = Math.max(dp[i][k][0] - dp[k + 1][j][1], dp[i][j][0]); // 최댓값 - 최솟값
+                        dp[i][j][1] = Math.min(dp[i][k][1] - dp[k + 1][j][0], dp[i][j][1]); // 최솟값 - 최대값
+                    } else {
+                        dp[i][j][0] = Math.max(dp[i][k][0] + dp[k + 1][j][0], dp[i][j][0]); // 최댓값 + 최댓값
+                        dp[i][j][1] = Math.min(dp[i][k][1] + dp[k + 1][j][1], dp[i][j][1]); // 최솟값 + 최솟값
+                    }
+                }
 
-        if(dp[start][end][flag] != Integer.MIN_VALUE && dp[start][end][flag] != Integer.MAX_VALUE)
-            return dp[start][end][flag];
-
-        dp[start][end][flag] = 0; // visited
-
-        int result = flag == 0 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
-
-        for(int i = start; i < end; i++) {
-            if(operations[i].equals("-")) {
-                result = flag == 0 ? Math.max(result, func(start, i, 0) - func(i + 1, end, 1)) : Math.min(result, func(start, i, 1) - func(i + 1, end, 0));
-            } else {
-                result = flag == 0 ? Math.max(result, func(start, i, 1) + func(i + 1, end, 1)) : Math.min(result, func(start, i, 0) + func(i + 1, end, 0));
             }
         }
 
-        return dp[start][end][flag] = result;
+        return dp[0][n - 1][0];
     }
 }
