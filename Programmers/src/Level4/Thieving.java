@@ -2,7 +2,7 @@ package Level4;
 
 // DP 동적계획법
 
-public class Thieving {
+public class Thieving { // 도둑질
     public int solution(int[] money) {
         int len = money.length;
 

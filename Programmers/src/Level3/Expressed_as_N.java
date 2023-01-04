@@ -2,7 +2,7 @@ package Level3;
 
 import java.util.*;
 
-public class Expressed_as_N {
+public class Expressed_as_N { // N으로 표현
     // (1) DP 동적계획법
     public int solution1(int N, int number) {
         Set<Integer>[] set = new HashSet[9];

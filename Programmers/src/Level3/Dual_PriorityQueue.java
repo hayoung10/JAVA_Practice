@@ -4,7 +4,7 @@ import java.util.*;
 
 // Heap 힙
 
-public class Dual_PriorityQueue {
+public class Dual_PriorityQueue { // 이중우선순위큐
     public int[] solution(String[] operations) {
         int[] answer = {0, 0};
 

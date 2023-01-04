@@ -1,6 +1,6 @@
 package Level4;
 
-public class Number_of_Correct_Parentheses {
+public class Number_of_Correct_Parentheses { // 올바른 괄호의 갯수
     // (1) DP 동적계획법
     public int solution(int n) {
         int dp[] = new int[n + 1];

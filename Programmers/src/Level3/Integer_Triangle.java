@@ -2,7 +2,7 @@ package Level3;
 
 // DP 동적계획법
 
-public class Integer_Triangle {
+public class Integer_Triangle { // 정수 삼각형
     public int solution(int[][] triangle) {
         int answer = 0;
         int[][] dp = new int[triangle.length][triangle.length];
