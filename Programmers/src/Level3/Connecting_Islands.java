@@ -37,4 +37,55 @@ public class Connecting_Islands { // 섬 연결하기
             return node;
         return parent[node] = findParent(parent[node]);
     }
+
+    // (2) Prim Algorithm
+    private static boolean[] visited = new boolean[101];
+    private Vector<Vector<Pair>> edges = new Vector<>();
+    private PriorityQueue<Pair> pq = new PriorityQueue<>();
+    private int total = 0;
+
+    public int solution2(int n, int[][] costs) {
+        for(int i = 0; i < n; i++)
+            edges.add(new Vector<>()); //
+
+        for(int i = 0; i < costs.length; i++) {
+            edges.get(costs[i][0]).add(new Pair(costs[i][1], costs[i][2]));
+            edges.get(costs[i][1]).add(new Pair(costs[i][0], costs[i][2]));
+        }
+        Prim(0);
+
+        return total;
+    }
+
+    private void Prim(Integer start) {
+        visited[start] = true;
+        for(int i = 0; i < edges.get(start).size(); i++) {
+            if(!visited[edges.get(start).get(i).node])
+                pq.add(edges.get(start).get(i));
+        }
+
+        while(!pq.isEmpty()) {
+            Pair check = pq.peek();
+            pq.remove();
+            if(!visited[check.node]) {
+                total += check.cost;
+                Prim(check.node);
+                return;
+            }
+        }
+    }
+}
+
+class Pair implements Comparable<Pair> {
+    int node, cost;
+
+    public Pair(int node, int cost) {
+        this.node = node;
+        this.cost = cost;
+    }
+
+    @Override
+    public int compareTo(Pair p) {
+        return Integer.compare(this.cost, p.cost);
+    }
 }
