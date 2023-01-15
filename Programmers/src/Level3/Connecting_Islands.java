@@ -74,18 +74,18 @@ public class Connecting_Islands { // 섬 연결하기
             }
         }
     }
-}
 
-class Pair implements Comparable<Pair> {
-    int node, cost;
+    class Pair implements Comparable<Pair> {
+        int node, cost;
 
-    public Pair(int node, int cost) {
-        this.node = node;
-        this.cost = cost;
-    }
+        public Pair(int node, int cost) {
+            this.node = node;
+            this.cost = cost;
+        }
 
-    @Override
-    public int compareTo(Pair p) {
-        return Integer.compare(this.cost, p.cost);
+        @Override
+        public int compareTo(Pair p) {
+            return Integer.compare(this.cost, p.cost);
+        }
     }
 }
