@@ -108,13 +108,13 @@ public class Pick_up_Item { // 아이템 줍기
 
         BFS(x, y);
     }
-}
 
-class Pair {
-    int x, y;
+    class Pair {
+        int x, y;
 
-    public Pair(int x, int y) {
-        this.x = x;
-        this.y = y;
+        public Pair(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
     }
 }
