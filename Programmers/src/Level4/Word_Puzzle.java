@@ -12,7 +12,7 @@ public class Word_Puzzle { // 단어 퍼즐
             for(int j = 0; j < strs.length; j++) {
                 int lastIdx = strs[j].length() - 1;
 
-                if(t.charAt(i) != strs[j].charAt(lastIdx) || i < lastIdx) continue;
+                if(i < lastIdx) continue;
 
                 if(strs[j].equals(t.substring(i - lastIdx, i + 1))) {
                     if(i == lastIdx)
