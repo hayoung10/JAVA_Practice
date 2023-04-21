@@ -8,7 +8,7 @@ public class Insert_Advertising { // 광고 삽입
         int pTime = convertToInt(play_time);
         int aTime = convertToInt(adv_time);
 
-        int[] timeCnt = new int[pTime + 1];
+        long[] timeCnt = new long[pTime + 1];
         for(String log : logs) {
             timeCnt[convertToInt(log.substring(0, 8))]++;
             timeCnt[convertToInt(log.substring(9))]--;
