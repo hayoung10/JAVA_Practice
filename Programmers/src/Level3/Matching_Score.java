@@ -10,7 +10,7 @@ public class Matching_Score { // 매칭 점수
         // 초기화
         for(int i = 0; i < pages.length; i++) {
             Page page = new Page(i, pages[i].toLowerCase());
-            page.setDefaultScore(word);
+            page.setDefaultScore(word.toLowerCase());
             map.put(page.url, page);
         }
 
