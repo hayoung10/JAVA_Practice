@@ -3,8 +3,8 @@ package Level3;
 public class Ball_Movement_Simulation { // 공 이동 시뮬레이션
     public long solution(int n, int m, int x, int y, int[][] queries) {
         // 좌표의 범위 : (x1, y1) ~ (x2, y2)
-        int x1 = x, x2 = x;
-        int y1 = y, y2 = y;
+        long x1 = x, x2 = x;
+        long y1 = y, y2 = y;
 
         for(int i = queries.length - 1; i >= 0; i--) { // 역순으로 추적
             int query = queries[i][0];
