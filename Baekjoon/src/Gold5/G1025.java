@@ -15,9 +15,9 @@ public class G1025 { // 제곱수 찾기
 
         for(int i = 0; i < N; i++) {
             for(int j = 0; j < M; j++) {
-                for(int dx = -N + 1; dx < N; dx++) {
-                    for(int dy = -M + 1; dy < M; dy++) {
-                        if(dx == 0 && dy == 0) continue;
+                for(int dx = -N; dx < N; dx++) {
+                    for(int dy = -M; dy < M; dy++) {
+                        if(dx == 0 && dy == 0) continue; // 움직이지 않은 경우
 
                         int x = i;
                         int y = j;
