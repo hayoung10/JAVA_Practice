@@ -55,20 +55,20 @@ public class G1261 { // 알고스팟
 
         System.out.println(bfs(0, 0));
     }
-}
 
-class Node implements Comparable<Node> {
-    int x, y;
-    int wallCnt; // 부순 벽의 개수
+    static class Node implements Comparable<Node> {
+        int x, y;
+        int wallCnt; // 부순 벽의 개수
 
-    public Node(int x, int y, int wallCnt) {
-        this.x = x;
-        this.y = y;
-        this.wallCnt = wallCnt;
-    }
+        public Node(int x, int y, int wallCnt) {
+            this.x = x;
+            this.y = y;
+            this.wallCnt = wallCnt;
+        }
 
-    @Override
-    public int compareTo(Node o) {
-        return this.wallCnt - o.wallCnt;
+        @Override
+        public int compareTo(Node o) {
+            return this.wallCnt - o.wallCnt;
+        }
     }
 }
