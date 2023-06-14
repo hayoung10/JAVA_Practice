@@ -10,6 +10,7 @@ public class G1334 { // 다음 팰린드롬 수
         String N = br.readLine(); // 주어진 수 N
         int[] numbers = Arrays.stream(N.split("")).mapToInt(Integer::parseInt).toArray();
         int len = numbers.length;
+        System.out.println(len);
 
         boolean allNine = true; // 해당 수가 모두 9로 이루어져 있는지 확인
         for(int i = 0; i < len; i++) {
@@ -25,11 +26,11 @@ public class G1334 { // 다음 팰린드롬 수
             answer += "1";
             System.out.println(answer);
         } else {
-            int[] tmpNumbers = Arrays.copyOf(numbers, len);
+            int[] tmpNumbers = Arrays.copyOf(numbers, len); // 팰린드롬 수
             for(int i = len - 1; i >= len / 2; i--)
                 tmpNumbers[i] = tmpNumbers[len - i - 1];
 
-            boolean check = true; // 만든 팰린드롬 수가 N보다 작거나 같은지 확인
+            boolean check = false; // 만든 팰린드롬 수가 N보다 작거나 같은지 확인
             for(int i = 0; i < len; i++) {
                 if(tmpNumbers[i] != numbers[i]) {
                     check = tmpNumbers[i] > numbers[i];
