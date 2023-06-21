@@ -16,10 +16,10 @@ public class G1896 { // 파급효과
             {0, 1, 3}, {2, 3}, {0, 2, 3}, {1, 2, 3}, {0, 1, 2, 3}
     }; // 연결된 정보
 
-    static boolean[][] visited;
-    static HashSet<Integer> numbers;
+    static boolean[][] visited; // 검사 여부
+    static HashSet<Integer> numbers; // 폴리노미오
 
-    private static boolean rule1() {
+    private static boolean rule1() { //  첫 번째 규칙 검사
         visited = new boolean[R][C];
 
         for(int i = 0; i < R; i++) {
@@ -34,7 +34,7 @@ public class G1896 { // 파급효과
         return true;
     }
 
-    private static boolean bfs(int x, int y) {
+    private static boolean bfs(int x, int y) { // 같은 폴리노미오 안의 숫자 검사
         visited[x][y] = true;
         if(numbers.contains(table[x][y])) return false;
 
@@ -44,13 +44,13 @@ public class G1896 { // 파급효과
             int ny = y + dy[k];
 
             if(visited[nx][ny]) continue;
-            bfs(nx, ny);
+            if(!bfs(nx, ny)) return false;
         }
 
         return true;
     }
 
-    private static boolean rule2() {
+    private static boolean rule2() { // 두 번째 규칙 검사
         for(int i = 0; i < R; i++) {
             for(int j = 0; j < C; j++) {
                 int num = table[i][j];
@@ -77,6 +77,7 @@ public class G1896 { // 파급효과
 
         int T = Integer.parseInt(br.readLine());
         for(int i = 0; i < T; i++) {
+            // 초기화
             st = new StringTokenizer(br.readLine());
             R = Integer.parseInt(st.nextToken());
             C = Integer.parseInt(st.nextToken());
@@ -87,6 +88,7 @@ public class G1896 { // 파급효과
             for(int j = 0; j < R; j++)
                 direction[j] = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 
+            // 규칙 검사
             if(rule1() && rule2()) System.out.println("valid");
             else System.out.println("invalid");
         }
