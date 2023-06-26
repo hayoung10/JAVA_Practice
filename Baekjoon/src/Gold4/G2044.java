@@ -33,7 +33,7 @@ public class G2044 { // windows
                     window.m = x - i + 1;
 
                     windows.add(window);
-                    info[i][j] = info[i][y] = info[x][j] = info[x][y] = '.';
+                    info[i][j] = info[i][y] = info[x][j] = info[x][y] = '.'; // 이미 검사한 window
                 }
             }
         }
