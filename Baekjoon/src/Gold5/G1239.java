@@ -58,7 +58,7 @@ public class G1239 { // 차트
         } else if(chart[N - 1] == 50) { // 원의 중심을 지나는 선이 한 개인 경우
             System.out.println(1);
         } else {
-            permutation(0);
+            permutation(0); // 순열을 이용하여 전체 탐색 (Brute-Force)
             System.out.println(answer / 2);
         }
     }
