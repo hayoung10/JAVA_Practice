@@ -14,7 +14,7 @@ public class G1759 { // 암호 만들기
         for(Character c : output)
             if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') cnt++;
 
-        if(cnt >= 1 && C - cnt >= 2) System.out.println(String.valueOf(output));
+        if(cnt >= 1 && L - cnt >= 2) System.out.println(String.valueOf(output));
     }
 
     private static void permutation(int idx, int depth) { // 정렬된 알파벳을 증가하는 순서로 암호 구성
