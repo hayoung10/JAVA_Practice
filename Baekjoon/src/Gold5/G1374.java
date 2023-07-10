@@ -30,14 +30,13 @@ public class G1374 { // 강의실
     }
     
     public static void main(String[] args) throws IOException {
+        // 초기화
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         int N = Integer.parseInt(br.readLine());
-
-        int[] arr;
+        StringTokenizer st;
         for(int i = 0; i < N; i++) {
-            arr = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            pq.add(new Lecture(arr[1], arr[2]));
+            st = new StringTokenizer(br.readLine()); st.nextToken();
+            pq.add(new Lecture(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));
         }
 
         System.out.println(solution(N));
