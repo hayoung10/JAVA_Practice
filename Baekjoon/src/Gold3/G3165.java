@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class G3165 { // 5
-    private static int count(String str) {
+    private static int count(String str) { // 5인 자릿 수를 세기
         int cnt = 0;
         for(int i = 0; i < str.length(); i++)
             if(str.charAt(i) == '5') cnt++;
@@ -14,16 +14,16 @@ public class G3165 { // 5
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        String answer = st.nextToken(); int K = Integer.parseInt(st.nextToken());
+        long N = Long.parseLong(st.nextToken()); int K = Integer.parseInt(st.nextToken());
 
-        long N = Long.parseLong(answer);
+        String answer = String.valueOf(N + 1);
         long num = 0;
         int len = answer.length();
-        int idx = 1;
+        int idx = 1; // 뒤에서부터 접근한 자릿수
         while(true) {
-            if(num > N && count(answer) >= K) break;
+            if(count(answer) >= K) break;
 
-            while(answer.charAt(len - idx) == '5' && idx < len)
+            while(answer.charAt(len - idx) == '5' && idx < len) // 뒤에서 부터 접근
                 idx++;
 
             num = Long.parseLong(answer) + (long) Math.pow(10, idx - 1);
