@@ -2,7 +2,7 @@ package Gold4;
 
 import java.io.*;
 
-public class G1089 { // 스타트링크 파워
+public class G1089 { // 스타트링크 타워
     static String[] numbers = {
             "####.##.##.####", // 0
             "..#..#..#..#..#", // 1
