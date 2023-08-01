@@ -2,7 +2,7 @@ package Level3;
 
 // DP 동적계획법
 
-public class Optimal_Matrix_Installation { // 최적의 행렬 곱셈
+public class Optimal_Matrix_Multiplication { // 최적의 행렬 곱셈
     public int solution(int[][] matrix_sizes) {
         int len = matrix_sizes.length;
         int[][] dp = new int[len][len]; // dp[i][j] = i번째 행렬부터 j번째 형렬까지 최소 연산 횟수
