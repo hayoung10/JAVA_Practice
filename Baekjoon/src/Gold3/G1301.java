@@ -20,7 +20,7 @@ public class G1301 { // 비즈 공예
         if(c > 0 && pp != 2 && p != 2) ret += solution(p, 2, a, b, c - 1, d, e);
         if(d > 0 && pp != 3 && p != 3) ret += solution(p, 3, a, b, c, d - 1, e);
         if(e > 0 && pp != 4 && p != 4) ret += solution(p, 4, a, b, c, d, e - 1);
-        return ret;
+        return dp[pp][p][a][b][c][d][e] = ret;
     }
 
     public static void main(String[] args) throws IOException {
