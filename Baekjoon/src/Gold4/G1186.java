@@ -43,10 +43,10 @@ public class G1186 { // 직사각형 색칠하기
                 listRect.add(new int[]{rect[0], rect[1], newRect[0], newRect[3]});
             }
             else {
-                boolean left = (rect[0] <= newRect[2] && newRect[2] <= rect[2]); // 새로운 직사각형이 rect 직사각형 왼쪽과 겹치는 경우
-                boolean top = (rect[1] <= newRect[1] && newRect[1] <= rect[3]); // 새로운 직사각형이 rect 직사각형 위쪽과 겹치는 경우
-                boolean right = (rect[0] <= newRect[0] && newRect[0] <= rect[2]); // 새로운 직사각형이 rect 직사각형 오른쪽과 겹치는 경우
-                boolean bottom = (rect[1] <= newRect[3] && newRect[3] <= rect[3]); // 새로운 직사각형이 rect 직사각형 아래쪽과 겹치는 경우
+                boolean left = (rect[0] <= newRect[2] && newRect[2] <= rect[2] && newRect[0] <= rect[0]); // 새로운 직사각형이 rect 직사각형 왼쪽과 겹치는 경우
+                boolean top = (rect[1] <= newRect[1] && newRect[1] <= rect[3] && newRect[3] >= rect[3]); // 새로운 직사각형이 rect 직사각형 위쪽과 겹치는 경우
+                boolean right = (rect[0] <= newRect[0] && newRect[0] <= rect[2] && newRect[2] >= rect[2]); // 새로운 직사각형이 rect 직사각형 오른쪽과 겹치는 경우
+                boolean bottom = (rect[1] <= newRect[3] && newRect[3] <= rect[3] && newRect[1] <= rect[1]); // 새로운 직사각형이 rect 직사각형 아래쪽과 겹치는 경우
 
                 if(left) {
                     if(top) { // rect 직사각형의 좌측 상단과 겹치는 경우
