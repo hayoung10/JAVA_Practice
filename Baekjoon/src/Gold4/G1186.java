@@ -17,70 +17,18 @@ public class G1186 { // 직사각형 색칠하기
             if(newRect[0] >= rect[2] || newRect[1] >= rect[3] || newRect[2] <= rect[0] || newRect[3] <= rect[1]) {
                 listRect.add(rect);
             }
-            // rect 직사각형이 한 개로 나눠지는 경우
-            else if(newRect[0] <= rect[0] && (rect[1] <= newRect[1] && newRect[1] <= rect[3]) && newRect[2] >= rect[2] && newRect[3] >= rect[3]) {
-                listRect.add(new int[]{rect[0], rect[1], rect[2], newRect[1]}); // 새로운 직사각형이 위쪽에 있는 경우
-            } else if((rect[0] <= newRect[0] && newRect[0] <= rect[2]) && newRect[1] <= rect[1] && newRect[2] >= rect[2] && newRect[3] >= rect[3]) {
-                listRect.add(new int[]{rect[0], rect[1], newRect[0], rect[3]}); // 새로운 직사각형이 오른쪽에 있는 경우
-            } else if(newRect[0] <= rect[0] && newRect[1] <= rect[1] && newRect[2] >= rect[2] && (rect[1] <= newRect[3] && newRect[3] <= rect[3])) {
-                listRect.add(new int[]{rect[0], newRect[3], rect[2], rect[3]}); // 새로운 직사각형이 아래쪽에 있는 경우
-            } else if(newRect[0] <= rect[0] && newRect[1] <= rect[1] && (rect[0] <= newRect[2] && newRect[2] <= rect[2]) && newRect[3] >= rect[3]) {
-                listRect.add(new int[]{newRect[2], rect[1], rect[2], rect[3]}); // 새로운 직사각형이 왼쪽에 있는 경우
-            }
-            // 새로운 직사각형이 rect 직사각형 중앙을 지나는 경우
-            else if(newRect[0] >= rect[0] && newRect[1] <= rect[1] && newRect[2] <= rect[2] && newRect[3] >= rect[3]) { // 세로로 지나는 경우
-                listRect.add(new int[]{rect[0], rect[1], newRect[0], rect[3]});
-                listRect.add(new int[]{newRect[2], rect[1], rect[2], rect[3]});
-            } else if(newRect[0] <= rect[0] && newRect[1] >= rect[1] && newRect[2] >= rect[2] && newRect[3] <= rect[3]) { // 가로로 지나는 경우
-                listRect.add(new int[]{rect[0], rect[1], rect[2], newRect[1]});
-                listRect.add(new int[]{rect[0], newRect[3], rect[2], rect[3]});
-            }
-            // rect 직사각형이 네 개로 나눠지는 경우 (= rect 직사각형에 새로운 직사각형이 포함되는 경우)
-            else if(newRect[0] >= rect[0] && newRect[1] >= rect[1] && newRect[2] <= rect[2] && newRect[3] <= rect[3]) {
-                listRect.add(new int[]{rect[0], newRect[3], newRect[2], rect[3]});
-                listRect.add(new int[]{newRect[2], newRect[1], rect[2], rect[3]});
-                listRect.add(new int[]{newRect[0], rect[1], rect[2], newRect[1]});
-                listRect.add(new int[]{rect[0], rect[1], newRect[0], newRect[3]});
-            }
+            // 두 직사각형이 일부만 겹치는 경우
             else {
-                boolean left = (rect[0] <= newRect[2] && newRect[2] <= rect[2] && newRect[0] <= rect[0]); // 새로운 직사각형이 rect 직사각형 왼쪽과 겹치는 경우
-                boolean top = (rect[1] <= newRect[1] && newRect[1] <= rect[3] && newRect[3] >= rect[3]); // 새로운 직사각형이 rect 직사각형 위쪽과 겹치는 경우
-                boolean right = (rect[0] <= newRect[0] && newRect[0] <= rect[2] && newRect[2] >= rect[2]); // 새로운 직사각형이 rect 직사각형 오른쪽과 겹치는 경우
-                boolean bottom = (rect[1] <= newRect[3] && newRect[3] <= rect[3] && newRect[1] <= rect[1]); // 새로운 직사각형이 rect 직사각형 아래쪽과 겹치는 경우
-
-                if(left) {
-                    if(top) { // rect 직사각형의 좌측 상단과 겹치는 경우
-                        listRect.add(new int[]{rect[0], rect[1], newRect[2], newRect[1]});
-                        listRect.add(new int[]{newRect[2], rect[1], rect[2], rect[3]});
-                    } else if(bottom) { // rect 직사각형의 좌측 하단과 겹치는 경우
-                        listRect.add(new int[]{rect[0], newRect[3], newRect[2], rect[3]});
-                        listRect.add(new int[]{newRect[2], rect[1], rect[2], rect[3]});
-                    } else { // rect 직사각형의 좌측 중앙만 겹치는 경우
-                        listRect.add(new int[]{rect[0], newRect[3], newRect[2], rect[3]});
-                        listRect.add(new int[]{rect[0], rect[1], newRect[2], newRect[1]});
-                        listRect.add(new int[]{newRect[2], rect[1], rect[2], rect[3]});
-                    }
-                } else if(right) { // rect 직사각형의 우측 상단과 겹치는 경우
-                    if(top) {
-                        listRect.add(new int[]{rect[0], rect[1], newRect[0], rect[3]});
-                        listRect.add(new int[]{newRect[0], rect[1], rect[2], newRect[1]});
-                    } else if(bottom) { // rect 직사각형의 우측 하단과 겹치는 경우
-                        listRect.add(new int[]{rect[0], rect[1], newRect[0], rect[3]});
-                        listRect.add(new int[]{newRect[0], newRect[3], rect[2], rect[3]});
-                    } else { // rect 직사각형의 우측 중앙만 겹치는 경우
-                        listRect.add(new int[]{newRect[0], newRect[3], rect[2], rect[3]});
-                        listRect.add(new int[]{newRect[0], rect[1], rect[2], newRect[1]});
-                        listRect.add(new int[]{rect[0], rect[1], newRect[0], rect[3]});
-                    }
-                } else if(top) { // rect 직사각형의 상단 중앙만 겹치는 경우
-                    listRect.add(new int[]{rect[0], newRect[1], newRect[0], rect[3]});
-                    listRect.add(new int[]{newRect[2], newRect[1], rect[2], rect[3]});
-                    listRect.add(new int[]{rect[0], rect[1], rect[2], newRect[1]});
-                } else if(bottom) { // rect 직사각형의 하단 중앙만 겹치는 경우
-                    listRect.add(new int[]{rect[0], rect[1], newRect[0], newRect[3]});
-                    listRect.add(new int[]{newRect[2], rect[1], rect[2], newRect[3]});
-                    listRect.add(new int[]{rect[0], newRect[3], rect[2], rect[3]});
-                }
+                // 겹치는 부분의 x1, y1, x2, y2 좌표
+                int max_x1 = Math.max(rect[0], newRect[0]);
+                int max_y1 = Math.max(rect[1], newRect[1]);
+                int min_x2 = Math.min(rect[2], newRect[2]);
+                int min_y2 = Math.min(rect[3], newRect[3]);
+                // 겹치는 부분을 제외한 rect 직사각형을 다시 직사각형으로 나누기
+                if(rect[1] < max_y1) listRect.add(new int[]{rect[0], rect[1], rect[2], max_y1});
+                if(min_y2 < rect[3]) listRect.add(new int[]{rect[0], min_y2, rect[2], rect[3]});
+                if(rect[0] < max_x1 && max_y1 < min_y2) listRect.add(new int[]{rect[0], max_y1, max_x1, min_y2});
+                if(min_x2 < rect[2] && max_y1 < min_y2) listRect.add(new int[]{min_x2, max_y1, rect[2], min_y2});
             }
         }
         rects.set(idx, listRect);
@@ -107,7 +55,6 @@ public class G1186 { // 직사각형 색칠하기
             for(int j = 0; j < rects.size(); j++) compare(j);
             rects.add(List.of(newRect));
         }
-
         List<Area> areas = sumArea();
         Collections.sort(areas);
         List<Integer> answer = new ArrayList<>();
