@@ -48,11 +48,12 @@ public class G1580 { // 위치 바꾸기
             board[i] = br.readLine();
 
             for(int j = 0; j < M; j++) {
-                if(board[i].charAt(j) == 'A') ax = i; ay = j;
-                if(board[i].charAt(j) == 'B') bx = i; by = j;
+                if(board[i].charAt(j) == 'A') { ax = i; ay = j; }
+                if(board[i].charAt(j) == 'B') { bx = i; by = j; }
             }
         }
         bfs();
-        System.out.println(dist[bx][by][ax][ay]);
+        if(visited[bx][by][ax][ay]) System.out.println(dist[bx][by][ax][ay]);
+        else System.out.println(-1);
     }
 }
