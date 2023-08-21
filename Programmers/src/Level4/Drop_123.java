@@ -2,6 +2,8 @@ package Level4;
 
 import java.util.*;
 
+// Tree Traveling 트리 탐색
+
 public class Drop_123 { // 1,2,3 떨어트리기
     public int[] solution(int[][] edges, int[] target) {
         // 트리 생성
@@ -19,14 +21,14 @@ public class Drop_123 { // 1,2,3 떨어트리기
 
         List<Integer> leafNodeOrder = new ArrayList<>(); // 리프 노드를 방문한 순서
         while(cases > 0) {
-            int node = 0;
+            int node = 0; // 1번 노드에서 시작
             while (!tree[node].isEmpty())
                 node = tree[node].get(pass[node]++ % tree[node].size()); // (현재 노드를 지난 횟수 % 자식 노드의 개수)번째 자식 노드와 연결된 간선 선택
 
             cnt[node]++;
             leafNodeOrder.add(node);
 
-            if(cnt[node] > target[node]) return new int[]{-1}; // target대로 숫자의 합을 만들 수 없는 경우
+            if(cnt[node] > target[node]) return new int[]{-1}; // target 대로 숫자의 합을 만들 수 없는 경우
 
             if(!visited[node] && target[node] <= 3 * cnt[node]) { // target 값을 만들 수 있는 경우
                 visited[node] = true;
@@ -38,7 +40,7 @@ public class Drop_123 { // 1,2,3 떨어트리기
         for(int node : leafNodeOrder) { // 1,2,3을 사전 순으로 대입
             cnt[node]--;
             for(int num = 1; num <= 3; num++) {
-                if(cnt[node] <= target[node] - num && target[num] - num <= 3 * cnt[node]) {
+                if(cnt[node] <= target[node] - num && target[node] - num <= 3 * cnt[node]) {
                     answer.add(num);
                     target[node] -= num;
                     break;
