@@ -1,45 +1,22 @@
 package Level3;
 
-import java.util.*;
-
 public class Let_s_memorize_Billions { // 억억단을 외우자
     public int[] solution(int e, int[] starts) {
         int[] answer = new int[starts.length];
 
-        ValueCount[] valueCounts = new ValueCount[e];
-        for(int i = 0; i < e; i++) valueCounts[i] = new ValueCount(i + 1, 0);
+        int[] cnt = new int[e + 1]; // cnt[i] : 숫자 i가 등장하는 횟수
+        for(int i = 1; i <= e; i++)
+            for(int j = 1; j <= e / i; j++)
+                cnt[i * j]++;
 
-        for(int i = 1; i <= e; i++) {
-            for(int j = 1; j <= e; j++) {
-                if(i * j > e) break;
-                valueCounts[i * j - 1].count++;
-            }
+        int[] max = new int[e + 1]; // max[i] : [i, e] 범위에서 가장 많이 등장한 수 중 가장 작은 수
+        max[e] = e;
+        for(int i = e - 1; i >= 1; i--) {
+            if(cnt[i] >= cnt[max[i + 1]]) max[i] = i;
+            else max[i] = max[i + 1];
         }
-        Arrays.sort(valueCounts);
 
-        for(int i = 0; i < starts.length; i++) {
-            for(int j = 0; j < e; j++) {
-                if(starts[i] <= valueCounts[j].value) {
-                    answer[i] = valueCounts[j].value;
-                    break;
-                }
-            }
-        }
+        for(int i = 0; i < starts.length; i++) answer[i] = max[starts[i]];
         return answer;
-    }
-
-    class ValueCount implements Comparable<ValueCount> {
-        int value;
-        int count;
-
-        public ValueCount(int value, int count) {
-            this.value = value;
-            this.count = count;
-        }
-
-        @Override
-        public int compareTo(ValueCount o) {
-            return this.count == o.count ? this.value - o.value : o.count - this.count;
-        }
     }
 }
