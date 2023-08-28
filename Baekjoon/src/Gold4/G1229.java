@@ -7,17 +7,13 @@ public class G1229 { // 육각수
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
+        if(N < 6) {
+            System.out.println(N); return;
+        }
 
         // 초기화
         int[] dp = new int[N + 1]; // dp[N] : 합이 N이 되는 육각수 개수의 최솟값
-        for(int i = 0; i <= 5; i++) {
-            dp[i] = i; dp[i + 6] = i + 1;
-        }
-        dp[12] = 2;
-
-        if(N < 13) {
-            System.out.println(dp[N]); return;
-        }
+        for(int i = 0; i <= 5; i++) dp[i] = i;
 
         // 육각수 만들기
         ArrayList<Integer> hexagon_List = new ArrayList<>(); // 육각수(hn) 리스트
