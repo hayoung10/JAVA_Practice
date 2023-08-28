@@ -27,9 +27,9 @@ public class G1229 { // 육각수
         // 육각수 개수의 최솟값 구하기
         for(int i = 13; i <= N; i++) {
             int minCnt = Integer.MAX_VALUE;
-            for(int h : hexagon_List) {
-                if(h > i) break;
-                minCnt = Math.min(minCnt, dp[i - h]);
+            for(int j = 0; j < hexagon_List.size(); j++) {
+                if(hexagon_List.get(j) > i) break;
+                minCnt = Math.min(minCnt, dp[i - hexagon_List.get(j)]);
             }
             dp[i] = minCnt + 1;
         }
