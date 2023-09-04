@@ -10,17 +10,17 @@ public class G1361 { // 두 스트링 마스크
         sb1.append(flStr);
 
         // 뒤쪽 문자열 비교
-        StringBuilder sb2 = new StringBuilder();
         int idx = blStr.length() - bsStr.length();
         if(!bsStr.equals(blStr.substring(idx))) return new StringBuilder("-1");
-        sb2.append(bsStr);
 
         int sb1Len = sb1.length();
         int str1Idx = -1;
-        for(int i = 0; i < idx; i++)
+        for(int i = 0; i < idx; i++) {
+            if(sb1Len < i + 1) break;
             if(sb1.substring(sb1Len - i - 1).equals(blStr.substring(0, i + 1))) str1Idx = i;
+        }
 
-        return sb1.append(blStr, str1Idx + 1, idx).append(sb2);
+        return sb1.append(blStr, str1Idx + 1, idx).append(bsStr);
     }
 
     public static void main(String[] args) throws IOException {
