@@ -7,10 +7,12 @@ public class G1493 { // 박스 채우기
     static int N;
     static int[] cube;
     static boolean flag = true; // 큐브를 이용해서 박스를 채울 수 있는지 여부
+    static int answer = 0;
 
-    private static int divide(int l, int w, int h) { // 분할 정복 이용
-        if(l == 0 || w == 0 || h == 0) return 0; // 모두 채운 경우
+    private static void divide(int l, int w, int h) { // 분할 정복 이용
+        if(l == 0 || w == 0 || h == 0) return; // 모두 채운 경우
 
+        flag = false;
         int size = 0; // 박스를 채울 큐브 중 가장 큰 한 변의 길이
         for(int i = N - 1; i >= 0; i--) {
             if(cube[i] == 0) continue;
@@ -19,12 +21,17 @@ public class G1493 { // 박스 채우기
             if(size > l || size > w || size > h) continue;
 
             cube[i]--;
-            return divide(l - size, w, h) + divide(size, w - size, h) + divide(size, size, h - size) + 1;
+            answer++;
+            flag = true;
+            break;
         }
 
         // 채울 수 없는 경우
-        flag = false;
-        return -1;
+        if(!flag) return;
+
+        divide(size, w - size, size);
+        divide(l - size, w, size);
+        divide(l, w, h - size);
     }
 
     public static void main(String[] args) throws IOException {
@@ -39,7 +46,7 @@ public class G1493 { // 박스 채우기
             cube[Integer.parseInt(st.nextToken())] = Integer.parseInt(st.nextToken());
         }
 
-        int answer = divide(length, width, height);
+        divide(length, width, height);
         System.out.println(flag ? answer : -1);
     }
 }
