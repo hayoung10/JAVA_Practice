@@ -23,11 +23,25 @@ public class G6597 { // 트리 복구
         return node;
     }
 
-    private static void postOrder(Node node) { // 후위 순회
+    private static void postOrder(Node node) { // (CASE 1) 후위 순회
         if(node == null) return;
         postOrder(node.left);
         postOrder(node.right);
         sb.append(node.data);
+    }
+
+    private static void postOrder2(int idx, int start, int end) { // (CASE 2) 후위 순회
+        if(start > end) return;
+
+        char root = preorder.charAt(idx);
+
+        for(int i = start; i <= end; i++) { // root를 기준으로 왼쪽/오른쪽 서브트리 탐색
+            if(inorder.charAt(i) != root) continue;
+
+            postOrder2(idx + 1, start, i - 1); // 왼쪽 서브트리 탐색
+            postOrder2(idx + 1 + (i - start), i + 1, end); // 오른쪽 서브트리 탐색
+            sb.append(root);
+        }
     }
 
     public static void main(String[] args) throws IOException {
@@ -43,14 +57,20 @@ public class G6597 { // 트리 복구
                 preorder = st.nextToken(); // 전위 순회
                 inorder = st.nextToken(); // 중위 순회
 
-                // 트리 만들기
+                /*
+                // CASE 1 트리 만들기
                 preIdx = 0;
                 map = new HashMap<>();
                 for(int i = 0; i < inorder.length(); i++) map.put(inorder.charAt(i), i);
                 Node root = makeTree(0, inorder.length() - 1);
 
-                // 후위 선회
+                // 후위 순회
                 postOrder(root);
+                sb.append("\n");
+                */
+
+                // CASE 2 트리를 만들지 않고 바로 탐색
+                postOrder2(0, 0, preorder.length() - 1);
                 sb.append("\n");
             }
         } catch (Exception e) {
