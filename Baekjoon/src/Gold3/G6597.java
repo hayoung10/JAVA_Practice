@@ -17,13 +17,13 @@ public class G6597 { // 트리 복구
         if(start == end) return node; // 자식 노드가 없는 경우
 
         int inIdx = map.get(data);
-        node.left = makeTree(start, inIdx - 1);
-        node.right = makeTree(inIdx + 1, end);
+        node.left = makeTree(start, inIdx - 1); // 왼쪽 자식 노드
+        node.right = makeTree(inIdx + 1, end); // 오른쪽 자식 노드
 
         return node;
     }
 
-    private static void postOrder(Node node) { // 후위 선회
+    private static void postOrder(Node node) { // 후위 순회
         if(node == null) return;
         postOrder(node.left);
         postOrder(node.right);
