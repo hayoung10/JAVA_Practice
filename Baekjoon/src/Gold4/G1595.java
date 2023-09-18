@@ -6,15 +6,21 @@ import java.util.*;
 public class G1595 { // 북쪽나라의 도로
     static List<Node>[] roads = new ArrayList[10001];
     static boolean[] visited = new boolean[10001];
+    static int city;
     static long maxDist = 0;
 
     private static void dfs(int loc, long dist) {
         visited[loc] = true;
         for(Node next : roads[loc]) {
-            if(!visited[next.to]) dfs(next.to, dist + next.dist);
-            if(visited[next.to]) maxDist = Math.max(maxDist, dist);
+            if(visited[next.to]) continue;
+
+            long nextDist = dist + next.dist;
+            if(maxDist < nextDist) {
+                maxDist = nextDist;
+                city = next.to;
+            }
+            dfs(next.to, nextDist);
         }
-        visited[loc] = false;
     }
 
     public static void main(String[] args) throws IOException {
@@ -34,7 +40,11 @@ public class G1595 { // 북쪽나라의 도로
             }
         } catch (Exception e) { }
 
-        for(int i = 0; i < 10001; i++) dfs(i, 0);
+        dfs(1, 0);
+
+        Arrays.fill(visited, false);
+        maxDist = 0;
+        dfs(city, 0);
         System.out.println(maxDist);
     }
 
