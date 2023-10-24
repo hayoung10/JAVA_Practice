@@ -13,7 +13,8 @@ public class G1341 { // 사이좋은 형제
         if(a == 0) {
             System.out.println("-");
             return;
-        } else if(a == 1) { // b == 0
+        }
+        if(b == 1) {
             System.out.println("*");
             return;
         }
