@@ -10,20 +10,6 @@ public class G1341 { // 사이좋은 형제
         long a = Long.parseLong(input[0]);
         long b = Long.parseLong(input[1]);
 
-        if(a == 0) {
-            System.out.println("-");
-            return;
-        } else if(a == 1) { // b == 0
-            System.out.println("*");
-            return;
-        }
-
-        boolean flag = false;
-        if(a < b - a) {
-            a = b - a;
-            flag = true;
-        }
-
         // 'a / b = ma / mb' 에서 m 구하기
         int n = 1;
         long mb = 0, m = -1;
@@ -41,16 +27,14 @@ public class G1341 { // 사이좋은 형제
             return;
         }
 
-        StringBuilder sb = new StringBuilder(Long.toBinaryString(m * a));
-        if(flag) {
-            for (int i = 0; i < sb.length(); i++) {
-                if(sb.charAt(i) == '1') sb.replace(i, i + 1, "-");
-                else sb.replace(i, i + 1, "*");
-            }
-        } else {
-            for(int i = 0; i < sb.length(); i++) {
-                if(sb.charAt(i) == '1') sb.replace(i, i + 1, "*");
-                else sb.replace(i, i + 1, "-");
+        StringBuilder sb = new StringBuilder();
+        long ma = m * a;
+        for(int i = n - 1; i >= 0; i--) {
+            if(ma / (long) Math.pow(2, i) == 1) {
+                sb.append("*");
+                ma -= (long) Math.pow(2, i);
+            } else {
+                sb.append("-");
             }
         }
         System.out.println(sb);
