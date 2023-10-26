@@ -10,21 +10,6 @@ public class G1341 { // 사이좋은 형제
         long a = Long.parseLong(input[0]);
         long b = Long.parseLong(input[1]);
 
-        if(a == 0) {
-            System.out.println("-");
-            return;
-        }
-        if(b == 1) {
-            System.out.println("*");
-            return;
-        }
-
-        boolean flag = false;
-        if(a < b - a) {
-            a = b - a;
-            flag = true;
-        }
-
         // 'a / b = ma / mb' 에서 m 구하기
         int n = 1;
         long mb = 0, m = -1;
