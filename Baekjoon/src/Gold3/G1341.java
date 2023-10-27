@@ -14,7 +14,7 @@ public class G1341 { // 사이좋은 형제
         int n = 1;
         long mb = 0, m = -1;
         while(n <= 60) {
-            mb = (long) Math.pow(2, n) - 1;
+            mb = (1L << n) - 1;
 
             if(mb % b == 0) {
                 m = mb / b;
@@ -30,9 +30,9 @@ public class G1341 { // 사이좋은 형제
         StringBuilder sb = new StringBuilder();
         long ma = m * a;
         for(int i = n - 1; i >= 0; i--) {
-            if(ma / (long) Math.pow(2, i) == 1) {
+            if((ma >> i) == 1) {
                 sb.append("*");
-                ma -= (long) Math.pow(2, i);
+                ma -= (1L << i);
             } else {
                 sb.append("-");
             }
