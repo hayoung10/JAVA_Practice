@@ -44,6 +44,43 @@ public class G2143 { // 두 배열의 합
         return ret;
     }
 
+    private static long twoPointer(int T) { // 투 포인터 알고리즘 이용
+        Collections.sort(aSum);
+        Collections.sort(bSum);
+
+        long ret = 0;
+        int aIdx = 0;
+        int bIdx = bSum.size() - 1;
+        int aValue, bValue;
+
+        while(aIdx < aSum.size() && bIdx >= 0) {
+            aValue = aSum.get(aIdx);
+            bValue = bSum.get(bIdx);
+            long sum = aValue + bValue;
+
+            if(sum == T) {
+                long aCnt = 0;
+                long bCnt = 0;
+                while(aIdx < aSum.size() && aValue == aSum.get(aIdx)) {
+                    aCnt++;
+                    aIdx++;
+                }
+                while(bIdx >= 0 && bValue == bSum.get(bIdx)) {
+                    bCnt++;
+                    bIdx--;
+                }
+
+                ret += aCnt * bCnt;
+            } else if(sum < T) {
+                aIdx++;
+            } else {
+                bIdx--;
+            }
+        }
+
+        return ret;
+    }
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int T = Integer.parseInt(br.readLine());
@@ -73,6 +110,7 @@ public class G2143 { // 두 배열의 합
         }
 
         // 모든 부 배열 쌍의 개수 구하기
-        System.out.println(binarySearch(T));
+//        System.out.println(binarySearch(T)); // 이분 탐색 이용
+        System.out.println(twoPointer(T)); // 투 포인터 알고리즘 이용 (--> 해당 문제에서 더 효율적)
     }
 }
