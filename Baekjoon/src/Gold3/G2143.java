@@ -82,12 +82,17 @@ public class G2143 { // 두 배열의 합
     }
 
     public static void main(String[] args) throws IOException {
+        // 초기화
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int T = Integer.parseInt(br.readLine());
         int n = Integer.parseInt(br.readLine());
-        int[] A = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int[] A = new int[n];
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for(int i = 0; i < n; i++) A[i] = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(br.readLine());
-        int[] B = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int[] B = new int[m];
+        st = new StringTokenizer(br.readLine());
+        for(int i = 0; i < m; i++) B[i] = Integer.parseInt(st.nextToken());
 
         // 누적 합 구하기
         aSum = new ArrayList<>();
