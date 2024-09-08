@@ -1,11 +1,14 @@
 package Level3;
 
+// DFS 너비 우선 탐색
+
 public class Moving_the_Cart { // 수레 움직이기
     int n, m;
     int[][] board = new int[4][4];
     int[][] dir = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}, {0, 0}};
 
     boolean[][][] visited = new boolean[4][4][2];
+    int answer = Integer.MAX_VALUE;
 
     public int solution(int[][] maze) { // 0 빈칸, 5 벽 // 1(빨간수레) -> 3 // 2(파란수레) -> 4
         // 초기화
@@ -26,35 +29,36 @@ public class Moving_the_Cart { // 수레 움직이기
             }
         }
 
-        int answer = bfs(redCart, blueCart, 0);
+        DFS(redCart, blueCart, 0);
 
         return answer == Integer.MAX_VALUE ? 0 : answer;
     }
 
-    private int bfs(Point red, Point blue, int turn) {
-        if(checkToArrived(red, blue)) return turn;
+    private void DFS(Point red, Point blue, int turn) {
+        if(checkToArrived(red, blue)) {
+            answer = Math.min(answer, turn);
+            return;
+        }
 
-        int res = Integer.MAX_VALUE;
         for(int i = 0; i < 5; i++) {
+            Point nRed = new Point(red.x + dir[i][0], red.y + dir[i][1]); // 다음 빨간색 수레
+
             for(int j = 0; j < 5; j++) {
                 if(i == 4 && j == 4) break; // 수레 모두 움직이지 않은 경우
 
-                Point nRed = new Point(red.x + dir[i][0], red.y + dir[i][1]); // 다음 빨간색 수레
                 Point nBlue = new Point(blue.x + dir[j][0], blue.y + dir[j][1]); // 다음 파란색 수레
 
                 if (!checkTheRules(red, nRed, blue, nBlue)) continue; // 수레를 움직일 때의 규칙 확인하기
                 visited[nRed.x][nRed.y][0] = true;
                 visited[nBlue.x][nBlue.y][1] = true;
 
-                res = Math.min(res, bfs(nRed, nBlue, turn + 1));
+                DFS(nRed, nBlue, turn + 1);
 
                 // 방문 기록 초기화
                 visited[nRed.x][nRed.y][0] = false;
                 visited[nBlue.x][nBlue.y][1] = false;
             }
         }
-
-        return res;
     }
 
     private boolean checkToArrived(Point red, Point blue) { // 빨간색 수레와 파란색 수레 모두 각각의 도착칸에 도착했는지 확인
